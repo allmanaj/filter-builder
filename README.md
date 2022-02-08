@@ -1,4 +1,4 @@
-# Eloquent Filter
+# Or Where
 Eloquent Filter is a Laravel inspired filter builder for Javascript arrays. It allows the dynamic building of complex filters using the `where`, `orWhere`, `whereIncludes`, `whereIn` and `whereContains` methods.
 
 ## Example
