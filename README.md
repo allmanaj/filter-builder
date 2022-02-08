@@ -1,10 +1,10 @@
-# Eloquent Filter
-Eloquent Filter is a Laravel inspired filter builder for Javascript arrays. It allows the dynamic building of complex filters using the `where`, `orWhere`, `whereIncludes`, `whereIn` and `whereContains` methods.
+# orWhere
+orWhere is a Laravel inspired filter builder for Javascript arrays. It allows the dynamic building of complex filters using the `where`, `orWhere`, `whereIncludes`, `whereIn` and `whereContains` methods.
 
 ## Example
-Eloquent Filter allows the writing of more user-friendly code when filtering through a large arrays of Objects (e.g. information from a database). Here's an example without and with Eloquent filter:
+orWhere allows the writing of more user-friendly code when filtering through a large arrays of Objects (e.g. information from a database). Here's an example without and with orWhere:
 
-### Without Eloquent filter
+### Without orWhere
 ```javascript
 users.filter(user => {
     return (user.name == 'Angus' || user.name == 'Jess' || user.name == 'Aaron') && user.age >= 25;
@@ -12,7 +12,7 @@ users.filter(user => {
 
 ```
 
-### With Eloquent filter
+### With orWhere
 ```javascript
 filter = FilterBuilder(users);
 filter.whereIn('name', ['Angus', 'Jess', 'Aaron'])
@@ -23,24 +23,24 @@ filter.whereIn('name', ['Angus', 'Jess', 'Aaron'])
 ## Installation
 
 ```shell
-npm i --save eloquent-filter
+npm i --save or-where
 ```
 or
 ```shell
-yarn add eloquent-filter
+yarn add or-where
 ```
 
 ## Setup
 
-To set up use of Eloquent Filter's `FilterBuilder` your file may look like the following
+To set up use of orWhere's `FilterBuilder` your file may look like the following
 
 ```javascript
 // CommonJS
-var eloquent = require('eloquent-filter');
-var filterBuilder = new eloquent.FilterBuilder([data])
+var orWhere = require('or-where');
+var filterBuilder = new orWhere.FilterBuilder([data])
 
 //ES6+
-import {FilterBuilder} from 'eloquent-filter';
+import {FilterBuilder} from 'or-where';
 let filterBuilder = new FilterBuilder([data])
 ```
 
