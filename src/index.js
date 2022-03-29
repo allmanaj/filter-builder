@@ -57,7 +57,9 @@ export default class FilterBuilder {
 
   whereIn(key, list) {
     this.makeAnd();
-    this.query += `(item.${key} ? ['${list.join('", "')}'].includes('' + item.${key}) : false)`;
+    this.query += `(item.${key} ? ["${list.join(
+      '", "',
+    )}"].includes('' + item.${key}) : false)`;
     return this;
   }
 

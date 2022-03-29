@@ -1,9 +1,9 @@
-import  { FilterBuilder } from '../src';
+import Builder from '../src';
 import data, {jess, angus, aaron} from './data'
 var filter;
 
 beforeEach(() => {
-    filter = new FilterBuilder(data)
+    filter = new Builder(data)
 })
 
 test('it filters falsy data with one argument', () => {
