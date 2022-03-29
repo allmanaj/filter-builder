@@ -1,29 +1,29 @@
-export class FilterBuilder {
-  constructor(data, options = {}) {
+export default class FilterBuilder {
+  constructor(data) {
     this.data = data;
-    this.query = "";
+    this.query = '';
   }
 
   where(...query) {
     this.makeAnd();
-    if (typeof query[0] === "function") {
-      this.query += "(";
+    if (typeof query[0] === 'function') {
+      this.query += '(';
       query[0](this);
-      this.query += ")";
+      this.query += ')';
     } else {
       if (query.length === 1) {
         this.query += `(item.${query[0]})`;
       } else if (query.length === 2) {
-        this.query += `(item.${query[0]} == ${typeof query[1] === 'string' ? "'" + query[1] + "'" : query[1]})`;
+        this.query += `(item.${query[0]} == ${typeof query[1] === 'string' ? '"' + query[1] + '"' : query[1]})`;
       } else if (query.length === 3) {
-        this.query += `(item.${query[0]} ${query[1]} ${typeof query[2] === 'string' ? "'" + query[2] + "'" : query[2]})`;
+        this.query += `(item.${query[0]} ${query[1]} ${typeof query[2] === 'string' ? '"' + query[2] + '"' : query[2]})`;
       }
     }
     return this;
   }
 
   orWhere(...query) {
-    this.query += " || ";
+    this.query += ' || ';
     return this.where(...query);
   }
 
@@ -38,7 +38,7 @@ export class FilterBuilder {
   }
 
   orWhereIncludes(list, key, value = null) {
-    this.query += " || ";
+    this.query += ' || ';
     this.whereIncludes(list, key, value);
     return this;
   }
@@ -50,41 +50,37 @@ export class FilterBuilder {
   }
 
   orWhereContains(key, value) {
-    this.query += " || ";
+    this.query += ' || ';
     this.whereContains(key, value);
     return this;
   }
 
   whereIn(key, list) {
     this.makeAnd();
-    this.query += `(item.${key} ? ['${list.join(
-      "', '"
-    )}'].includes("" + item.${key}) : false)`;
+    this.query += `(item.${key} ? ['${list.join('", "')}'].includes('' + item.${key}) : false)`;
     return this;
   }
 
   orWhereIn(key, list) {
-    this.query += " || ";
+    this.query += ' || ';
     this.whereIn(key, list);
     return this;
   }
 
   makeAnd() {
-    if (this.query.slice(-1).includes(")")) {
-      this.query += " && ";
+    if (this.query.slice(-1).includes(')')) {
+      this.query += ' && ';
     }
   }
 
   stripEmpties() {
-    this.query = this.query.replace(/&& \(\)/g, "");
-    this.query = this.query.replace(/\(\)  &&/g, "");
-    this.query = this.query.replace(/\(\) &&/g, "");
+    this.query = this.query.replace(/&& \(\)/g, '');
+    this.query = this.query.replace(/\(\)\s\s&&/g, '');
+    this.query = this.query.replace(/\(\)\s&&/g, '');
   }
 
   get() {
     this.stripEmpties();
-    return this.data.filter(item => {
-      return new Function("item", `"use strict";return ${this.query};`)(item);
-    });
+    return this.data.filter((item) => new Function('item', `'use strict';return ${this.query};`)(item));
   }
 }
