@@ -14,7 +14,7 @@
     "babel-jest": "^27.5.1",
     "babel-preset-env": "^1.7.0",
     "jest": "^27.5.1",
-    "microbundle": "^0.11.0"
+    "microbundle": "^0.14.2"
   },
   "source": "src/index.js",
   "main": "dist/index.js",
