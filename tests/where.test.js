@@ -26,17 +26,17 @@ test('it filters booleans with 2 arguments', () => {
     expect(output).toEqual([aaron])
 });
 
-test('it filters strings with 2 arguments', () => {
+test('it filters strings with 3 arguments', () => {
     const output = filter.where("name", "!=", "Angus").get()
     expect(output).toEqual([jess, aaron])
 });
 
-test('it filters numbers with 2 arguments', () => {
+test('it filters numbers with 3 arguments', () => {
     const output = filter.where("age", "<", 25).get()
     expect(output).toEqual([angus])
 });
 
-test('it filters booleans with 2 arguments', () => {
+test('it filters booleans with 3 arguments', () => {
     const output = filter.where("likesFootball", "!=", true).get()
     expect(output).toEqual([angus, jess])
 });

@@ -20,8 +20,8 @@ test('chaining whereContains uses && operator', () => {
 });
 
 test('chaining orWhereContains uses the || operator', () => {
-    const output = filter.whereIncludes("name", "a")
-        .orWhereIncludes("name", "s")
+    const output = filter.whereContains("name", "a")
+        .orWhereContains("name", "s")
         .get()
     expect(output).toEqual([angus, jess, aaron])
 });
